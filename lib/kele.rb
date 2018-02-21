@@ -1,10 +1,12 @@
 require 'httparty'
 require 'json'
 require_relative 'roadmap'
+require_relative 'submission'
 
 class Kele
   include HTTParty
   include Roadmap
+  include Submission
 
   def initialize(email, password)
     @email = email
@@ -44,21 +46,5 @@ class Kele
       },
       headers: { "authorization" => @auth_token })
     end
-
-    def create_submission(checkpoint_id, enrollment_id, comment = nil, assignment_branch = nil, assignment_commit_link = nil)
-      response = self.class.post("#{@bloc_api}" + "/checkpoint_submissions",
-        body: {
-          "checkpoint_id": checkpoint_id,
-          "enrollment_id": enrollment_id,
-          "assignment_branch": assignment_branch,
-          "assignment_commit_link": assignment_commit_link,
-          "comment": comment
-        },
-        headers: { "authorization" => @auth_token })
-
-
-    end
-
-
 
 end
