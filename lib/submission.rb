@@ -1,7 +1,7 @@
 module Submission
 
   def create_submission(checkpoint_id, enrollment_id, comment = nil, assignment_branch = nil, assignment_commit_link = nil)
-    response = self.class.post("#{@bloc_api}" + "/checkpoint_submissions",
+    response = self.class.post("#{@bloc_api}/checkpoint_submissions",
       body: {
         "checkpoint_id": checkpoint_id,
         "enrollment_id": enrollment_id,
@@ -13,7 +13,7 @@ module Submission
   end
 
   def update_submission(submission_id, checkpoint_id, enrollment_id, comment = nil, assignment_branch = nil, assignment_commit_link = nil)
-    response = self.class.put("#{@bloc_api}" + "/checkpoint_submissions" + "/#{submission_id}",
+    response = self.class.put("#{@bloc_api}/checkpoint_submissions/#{submission_id}",
       body: {
         "checkpoint_id": checkpoint_id,
         "enrollment_id": enrollment_id,
@@ -23,5 +23,5 @@ module Submission
       },
       headers: { "authorization" => @auth_token })
   end
-  
+
 end
